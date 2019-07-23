@@ -26,4 +26,20 @@ router.get('/leagues/:id', function (req, res, next) {
   })
 })
 
+/* POST ONE league. */
+router.post('/leagues/', function (req, res, next) {
+  var db = require('../db')
+  var League = db.Mongoose.model('leagues', db.LeagueSchema, 'leagues')
+  var newleague = new League({ name: req.body.name, email: req.body.email })
+  newleague.save(function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message })
+      res.end()
+      return
+    }
+    res.json(newleague)
+    res.end()
+  })
+})
+
 module.exports = router
