@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/rdb_api')
+mongoose.connect('mongodb://localhost/leagues')
 
-const customerSchema = new mongoose.Schema({
+const leagueSchema = new mongoose.Schema({
   name: String,
   email: String
-}, { collection: 'customers' }
+}, { collection: 'leagues' }
 )
 
-module.exports = { Mongoose: mongoose, CustomerSchema: customerSchema }
+module.exports = { Mongoose: mongoose, LeagueSchema: leagueSchema }
