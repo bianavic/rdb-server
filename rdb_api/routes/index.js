@@ -42,4 +42,19 @@ router.post('/leagues/', function (req, res, next) {
   })
 })
 
+/* PUT ONE league. */
+router.put('/leagues/:id', function (req, res, next) {
+  var db = require('../db')
+  var League = db.Mongoose.model('leagues', db.LeagueSchema, 'leagues')
+  League.findOneAndUpdate({ _id: req.params.id }, req.body, { upsert: true }, function (err, doc) {
+    if (err) {
+      res.status(500).json({ error: err.message })
+      res.end()
+      return
+    }
+    res.json(req.body)
+    res.end()
+  })
+})
+
 module.exports = router
