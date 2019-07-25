@@ -2,8 +2,11 @@ const express = require('express')
 const router = express.Router()
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' })
+router.get('/', function (req, res) {
+  global.db.findAll((e, docs) => {
+    if (e) { return console.log(e) }
+    res.render('index', { title: 'Lista das Ligas', docs: docs })
+  })
 })
 
 /* GET all leagues. */
